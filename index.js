@@ -42,5 +42,3 @@ mongoose.connect(`mongodb://localhost:27017/`, (error) => {
     console.log("Connected to database")}
 })
 
-
-//Fin
