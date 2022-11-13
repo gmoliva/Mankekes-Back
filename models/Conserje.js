@@ -22,6 +22,7 @@ const conserjeSchema = mongoose.Schema({
       type: Number
     }
 
+    
 })
 
 module.exports = mongoose.model('Conserje', conserjeSchema)

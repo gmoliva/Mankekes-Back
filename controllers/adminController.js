@@ -30,4 +30,5 @@ const getAdmins = (req, res) => {
 module.exports = {
   createAdmin,
   getAdmins
+  
 }

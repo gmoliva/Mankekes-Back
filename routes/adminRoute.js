@@ -7,4 +7,5 @@ api.post('/', adminController.createAdmin);
 api.get('/', adminController.getAdmins);
 
 
+
 module.exports = api;

@@ -11,6 +11,7 @@ const adminSchema = new Schema({
       type: String,
       required: true
     }
+    
 })
 
 module.exports = mongoose.model('Administrador', adminSchema)
