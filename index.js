@@ -31,7 +31,6 @@ app.use('/api/Novedad', novedadRoute)
 mongoose.set('autoIndex', true);
 
 const PORT = process.env.PORT;
-//bruh 
 app.listen(PORT, () => {
   console.log("Server running on PORT " + PORT)
 })
