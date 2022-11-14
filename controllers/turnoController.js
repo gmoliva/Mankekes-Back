@@ -35,8 +35,22 @@ const updateTurno = (req, res) => {
 	})
 }
 
+
+const getSpecific = (req, res) => {
+    let id = req.params.id
+    Turno.findById(id, (err, turno) => {
+        if (err) {
+            res.status(400).send({ message: err })
+        }
+        res.status(200).send(turno);
+    })
+}
+
+
+
 module.exports = {
 	createTurno,
 	getTurno,
-	updateTurno
+	updateTurno,
+	getSpecific
 }

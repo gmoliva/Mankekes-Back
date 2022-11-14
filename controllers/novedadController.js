@@ -41,7 +41,6 @@ const getNovedad = (req, res) => {
 }
 
 
-
 module.exports = {
 	createNovedad,
 	getNovedades,
