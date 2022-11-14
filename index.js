@@ -3,18 +3,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-var bodyParser = require('body-parser');
-
 const adminRoute = require('./routes/adminRoute')
 const conserjeRoute = require('./routes/conserjeRoute')
 const turnoRoute = require('./routes/turnoRoute')
 const novedadRoute = require('./routes/novedadRoute')
 
 const app = express();
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 app.options('*', cors());

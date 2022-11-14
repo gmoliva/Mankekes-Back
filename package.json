@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "tulon": "ls"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
