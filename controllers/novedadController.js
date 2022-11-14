@@ -30,8 +30,22 @@ const updateNovedad = (req, res) => {
 	})
 }
 
+const getNovedad = (req, res) => {
+    let id = req.params.id
+    Novedad.findById(id, (err, novedad) => {
+        if (err) {
+            res.status(400).send({ message: err })
+        }
+        res.status(200).send(novedad);
+    })
+}
+
+
+
 module.exports = {
 	createNovedad,
 	getNovedades,
-	updateNovedad
+	updateNovedad,
+	getNovedad
 }
+
