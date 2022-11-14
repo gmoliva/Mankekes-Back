@@ -5,6 +5,6 @@ const novedadController = require('../controllers/novedadController');
 
 api.post('/', novedadController.createNovedad);
 api.get('/', novedadController.getNovedades);
-//api.put('/:id', reservaController.modificarReserva)
+api.put('/:id', novedadController.updateNovedad);
 
 module.exports = api;

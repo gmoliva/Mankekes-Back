@@ -22,7 +22,16 @@ const getNovedades = (req, res) => {
 	})
 }
 
+const updateNovedad = (req, res) => {
+	const { id } = req.params;
+	Novedad.findByIdAndUpdate(id, req.body, (err, novedad) => {
+		if (err) return res.status(400).send({ message: "Error al modificar novedad" })
+		res.send(novedad)
+	})
+}
+
 module.exports = {
 	createNovedad,
-	getNovedades
+	getNovedades,
+	updateNovedad
 }
