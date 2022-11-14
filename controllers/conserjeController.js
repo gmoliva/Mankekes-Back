@@ -32,7 +32,19 @@ const getConserjes = (req, res) => {
 	})
 }
 
+// OBTENER UN CONSERJE ESPECIFICO
+const getSpecific = (req, res) => {
+    let id = req.params.id
+    Conserje.findById(id, (err, conserjes) => {
+        if (err) {
+            res.status(400).send({ message: err })
+        }
+        res.status(200).send(conserjes);
+    })
+}
+
 module.exports = {
   createConserje,
-  getConserjes
+  getConserjes,
+  getSpecific
 }
