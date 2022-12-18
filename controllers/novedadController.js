@@ -69,6 +69,17 @@ const getnovedadTurno = (req, res) => {
 
 }
 
+const getOnlyNovedades = (req, res) => {
+
+    Novedad.find({tipo: 0}, (err, novedad) => {
+        if (err) {
+            res.status(400).send({ message: "Error al listar" })
+        }
+        res.status(200).send(novedad);
+        //res.status(200).send({ message: "123"})
+    })
+}
+
 const enviarJustificacion = (req, res) => {
 	let idUsuario = req.params.idUsuario
 	
@@ -99,6 +110,7 @@ module.exports = {
 	updateNovedad,
 	deleteNovedad,
 	getnovedadTurno,
-	enviarJustificacion
+	enviarJustificacion,
+	getOnlyNovedades
 }
 

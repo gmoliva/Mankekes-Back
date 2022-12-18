@@ -22,7 +22,7 @@ const novedadSchema = new Schema({
 	idUsuario: {
 		type: Schema.Types.ObjectId,
 		ref: 'Usuario',
-		required: true
+		//required: true
 	}
 
 })
