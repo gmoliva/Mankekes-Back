@@ -1,37 +1,43 @@
 require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-const adminRoute = require('./routes/adminRoute')
-const conserjeRoute = require('./routes/conserjeRoute')
+const options = {
+  useNewUrlParser: true,
+  autoIndex: true,
+  keepAlive: true,
+  //connectTimeoutMS: 10000,
+  //socketTimeoutMS: 45000,
+  family: 4,
+  useUnifiedTopology: true
+}
+
 const turnoRoute = require('./routes/turnoRoute')
 const novedadRoute = require('./routes/novedadRoute')
+const usuarioRoute = require('./routes/usuarioRoute')
+const uploadRoute = require('./routes/uploadRoute')
+const mailerRoute = require('./routes/mailerRoute')
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.options('*', cors());
 
-app.use('/api/Administrador', adminRoute)
-app.use('/api/Conserje', conserjeRoute)
 app.use('/api/Turno', turnoRoute)
 app.use('/api/Novedad', novedadRoute)
+app.use('/api/Usuario', usuarioRoute)
+app.use('/api/Upload', uploadRoute)
+app.use('/api/mailer', mailerRoute)
 
-//mongoose.set('useFindAndModify', false);
-//mongoose.set('useNewUrlParser', true);
-//mongoose.set('useUnifiedTopology', true);
-//mongoose.set('useCreateIndex', true);
-mongoose.set('autoIndex', true);
-
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log("Server running on PORT " + PORT)
-})
-
-mongoose.connect(`mongodb://localhost:27017/`, (error) => {
-  if(error) console.log(error)
+mongoose.connect(process.env.URI, options, (error) => {
+  if (error) console.log(error)
   else {
-    console.log("Connected to database")}
+    console.log("Connected to database")
+  }
 })
 
+app.listen(process.env.PORT, () => {
+  console.log("Server running on PORT " + process.env.PORT)
+})

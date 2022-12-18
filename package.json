@@ -17,7 +17,11 @@
     "git": "^0.1.5",
     "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
+    "mime": "^3.0.0",
     "moment": "^2.29.1",
-    "mongoose": "^6.1.2"
+    "mongoose": "^6.1.2",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.0",
+    "nodemailer": "^6.8.0"
   }
 }

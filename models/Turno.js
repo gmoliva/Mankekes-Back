@@ -10,12 +10,13 @@ const turnoSchema = new Schema({
 		type: Number, enum: [0, 1],
 		required: true
 	},
-	idConserje: {
+	idUsuario: {
 		type: Schema.Types.ObjectId,
-		ref: 'Conserje'
+		ref: 'Usuario',
+		required: true
 	},
-	entrada: {type: String},
-	salida: {type: String}
+	entrada: {type: Date},
+	salida: {type: Date}
 	
 
 })
