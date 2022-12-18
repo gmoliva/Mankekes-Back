@@ -4,11 +4,10 @@ const mailer = require('../controllers/mailerController')
 const createTurno = (req, res) => {
 	
 	const {
+		fecha,
 		tipo,
 		idUsuario
 	} = req.body
-
-	let fecha = new Date();
 
 	const newTurno = new Turno({
 		fecha,
