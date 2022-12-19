@@ -12,7 +12,7 @@ const createNovedad = (req, res) => {
 	})
 
 	newNovedad.save((err, novedad) => {
-		if (err) return res.status(400).send({ message: "error guardando" })
+		if (err) return res.status(400).send({ message: err })
 		res.status(200).send(novedad)
 	})
 }

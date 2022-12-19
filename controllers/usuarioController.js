@@ -124,10 +124,12 @@ const isAdmin = (req, res) => {
 	Usuario.findOne({rut: reqRut}, (err, result) => {
 		if (err) return res.status(400).send({msg:err})
 		if(result){	
+			//console.log(result)
 			if (result.tipoUsuario === 0)
-			return res.status(202).send({msg: "TRUE"})
+			return res.status(202).send({msg: "TRUE", userId: result._id})
+
+			return res.status(200).send({msg: "FALSE", userId: result._id})
 		}
-		return res.status(200).send({msg: "FALSE"})
 	})
 
 

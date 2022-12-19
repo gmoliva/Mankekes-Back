@@ -17,7 +17,7 @@ const novedadSchema = new Schema({
 	idTurno: {
 		type: Schema.Types.ObjectId,
 		ref: 'Turno',
-		required: true
+		//required: true
 	},
 	idUsuario: {
 		type: Schema.Types.ObjectId,

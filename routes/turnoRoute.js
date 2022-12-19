@@ -9,6 +9,6 @@ api.get('/:id', turnoController.getTurno);
 api.put('/set/:id', turnoController.setEntradaSalida);
 api.delete('/:id', turnoController.deleteTurno);
 //api.put('/turnoIO/:idTurno', mailerController.setEntradaSalida);
-
+api.get('/getFromUser/:id', turnoController.getTurnoFrom);
 
 module.exports = api;

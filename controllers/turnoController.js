@@ -50,6 +50,22 @@ const getTurno = (req, res) => {
 	})
 }
 
+const getTurnoFrom = (req, res) => {
+	let id = req.params.id;
+	Turno.find({})
+	.where('idUsuario').ne([])
+	.where('idUsuario').equals(id)
+	.exec(
+	(err, turno) => {
+		if (err) {
+			res.status(400).send({
+				message: err
+			})
+		}
+		res.status(200).send(turno);
+	})
+}
+
 const updateTurno = (req, res) => {
 	let id = req.params.id
 	Turno.findByIdAndUpdate(id, req.body, (err, turno) => {
@@ -94,6 +110,7 @@ module.exports = {
 	createTurno,
 	getTurnos,
 	getTurno,
+	getTurnoFrom,
 	updateTurno,
 	deleteTurno,
 	setEntradaSalida
