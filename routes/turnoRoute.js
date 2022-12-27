@@ -8,6 +8,7 @@ api.get('/', turnoController.getTurnos);
 api.get('/:id', turnoController.getTurno);
 api.put('/set/:id', turnoController.setEntradaSalida);
 api.delete('/:id', turnoController.deleteTurno);
+api.put('/:id',turnoController.updateTurno);
 //api.put('/turnoIO/:idTurno', mailerController.setEntradaSalida);
 api.get('/getFromUser/:id', turnoController.getTurnoFrom);
 

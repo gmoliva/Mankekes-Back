@@ -2,18 +2,25 @@ const Turno = require('../models/Turno');
 const mailer = require('../controllers/mailerController')
 
 const createTurno = (req, res) => {
-	
+
 	const {
-		fecha,
 		tipo,
-		idUsuario
+		idUsuario,
+		horaEntrada,
+		horaSalida,
+		fecha
 	} = req.body
+
+	const entrada = new Date(Date.parse(`${fecha} ${horaEntrada}:00`));
+
+	const salida = new Date(Date.parse(`${fecha} ${horaSalida}:00`));
 
 	const newTurno = new Turno({
 		fecha,
 		tipo,
-		idUsuario
-
+		idUsuario,
+		entrada,
+		salida
 	})
 
 	newTurno.save((err, turno) => {
@@ -26,7 +33,6 @@ const createTurno = (req, res) => {
 }
 
 const getTurnos = (req, res) => {
-	
 	Turno.find()
 		.populate('idUsuario')
 		.exec((err, turno) => {
