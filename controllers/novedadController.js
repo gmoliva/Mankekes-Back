@@ -101,6 +101,22 @@ const enviarJustificacion = (req, res) => {
 	
 }
 
+const getNovedadesFrom = (req, res) => {
+	let id = req.params.idTurno;
+	Novedad.find()
+	.where('idTurno').ne([])
+	.where('idTurno').equals(id)
+	.exec(
+	(err, result) => {
+		if (err) {
+			res.status(400).send({
+				message: err
+			})
+		}
+		res.status(200).send(result);
+	})
+}
+
 
 
 module.exports = {
@@ -111,6 +127,8 @@ module.exports = {
 	deleteNovedad,
 	getnovedadTurno,
 	enviarJustificacion,
-	getOnlyNovedades
+	getOnlyNovedades,
+	getNovedadesFrom
+
 }
 
