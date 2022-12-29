@@ -10,6 +10,6 @@ api.put('/:id', novedadController.updateNovedad);
 api.delete('/:id', novedadController.deleteNovedad);
 api.post('/justificar/:idUsuario', novedadController.enviarJustificacion);
 api.get('/sn/search',novedadController.getOnlyNovedades);
-
+api.get('/getFromNov/:idTurno', novedadController.getNovedadesFrom);
 
 module.exports = api;

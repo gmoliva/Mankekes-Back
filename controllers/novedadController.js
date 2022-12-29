@@ -18,8 +18,10 @@ const createNovedad = (req, res) => {
 }
 
 const getNovedades = (req, res) => {
-	Novedad.find({}, (err, novedades) => {
-		if (err) return res.status(400).send({ message: "error listando" })
+	Novedad.find()
+		.populate('idTurno')
+		.exec((err, novedades) => {
+		if (err) return res.status(400).send({ message: err })
 		res.send(novedades)
 	})
 }
@@ -71,11 +73,14 @@ const getnovedadTurno = (req, res) => {
 
 const getOnlyNovedades = (req, res) => {
 
-    Novedad.find({tipo: 0}, (err, novedad) => {
+    Novedad.find({tipo: 0})
+		.populate('idUsuario')
+		.populate('idTurno')
+		.exec((err, novedades) => {
         if (err) {
             res.status(400).send({ message: "Error al listar" })
         }
-        res.status(200).send(novedad);
+        res.status(200).send(novedades);
         //res.status(200).send({ message: "123"})
     })
 }
@@ -101,6 +106,22 @@ const enviarJustificacion = (req, res) => {
 	
 }
 
+const getNovedadesFrom = (req, res) => {
+	let id = req.params.idTurno;
+	Novedad.find()
+	.where('idTurno').ne([])
+	.where('idTurno').equals(id)
+	.exec(
+	(err, result) => {
+		if (err) {
+			res.status(400).send({
+				message: err
+			})
+		}
+		res.status(200).send(result);
+	})
+}
+
 
 
 module.exports = {
@@ -111,6 +132,8 @@ module.exports = {
 	deleteNovedad,
 	getnovedadTurno,
 	enviarJustificacion,
-	getOnlyNovedades
+	getOnlyNovedades,
+	getNovedadesFrom
+
 }
 
