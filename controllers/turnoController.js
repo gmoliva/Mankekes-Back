@@ -1,16 +1,40 @@
 const Turno = require('../models/Turno');
 const mailer = require('../controllers/mailerController')
 
-const createTurno = (req, res) => {
+const validateTurno = (req, res) => {
 
+	//console.log("la fecha del nuevo turno es "+ req.body.fecha)
+	let id = req.body.idUsuario;
+	let nuevoTurno = req.body.fecha;
+
+	Turno.find({"fecha": nuevoTurno})
+	.where('idUsuario').equals(id)
+	.exec(
+	(err, turno) => {
+		if (err) console.log("err: "+err)
+
+		console.log(turno)
+
+		if(turno)
+		return sendTurno(req, res);
+		else 
+		return res.status(400).send({msg: "existe turno en la misma fecha"})
+
+	})
+	
+}
+
+
+const sendTurno = (req, res) => {
 	const {
 		tipo,
 		idUsuario,
 		horaEntrada,
 		horaSalida,
 		fecha
-	} = req.body
+	} = req.body;
 
+	
 	const entrada = new Date(Date.parse(`${fecha} ${horaEntrada}:00`));
 
 	const salida = new Date(Date.parse(`${fecha} ${horaSalida}:00`));
@@ -29,6 +53,13 @@ const createTurno = (req, res) => {
 		})
 		res.status(200).send(turno)
 	})
+
+}
+
+
+const createTurno = (req, res) => {
+
+	validateTurno(req, res);
 
 }
 
