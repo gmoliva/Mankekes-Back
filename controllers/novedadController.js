@@ -58,7 +58,7 @@ const deleteNovedad = (req, res) => {
 
 const getOnlyNovedades = (req, res) => {
 
-    Novedad.find({tipo: 0})
+    Novedad.find()
 		.populate('idUsuario')
 		.populate('idTurno')
 		.exec((err, novedades) => {
