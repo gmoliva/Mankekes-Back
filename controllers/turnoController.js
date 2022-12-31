@@ -7,17 +7,17 @@ const validateTurno = (req, res) => {
 	let id = req.body.idUsuario;
 	let nuevoTurno = req.body.fecha;
 
-	Turno.find({"fecha": nuevoTurno})
+	Turno.findOne({'fecha': nuevoTurno})
 	.where('idUsuario').equals(id)
-	.exec(
-	(err, turno) => {
+	.exec((err, turno) => 
+	{
 		if (err) console.log("err: "+err)
 
-		console.log(turno)
+		//console.log(turno)
 
-		if(turno)
+		if(!turno)
 		return sendTurno(req, res);
-		else 
+		else
 		return res.status(400).send({msg: "existe turno en la misma fecha"})
 
 	})
