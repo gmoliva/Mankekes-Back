@@ -5,6 +5,7 @@ const novedadController = require('../controllers/novedadController');
 
 api.post('/', novedadController.createNovedad);
 api.get('/search/', novedadController.getNovedades);
+api.get('/search/:idUsuario', novedadController.getheNovedades);
 api.get('/:id', novedadController.getNovedad);
 api.put('/:id', novedadController.updateNovedad);
 api.delete('/:id', novedadController.deleteNovedad);
