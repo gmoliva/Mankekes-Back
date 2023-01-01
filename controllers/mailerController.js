@@ -90,13 +90,15 @@ const sendShiftEmail = (req) => {
 const sendNotification = (req, res) => {
     let idUsuario = req.params.idUsuario
 
-    Usuario.findOne({rut: idUsuario}, (err, user) => {
+    Usuario.findOne({_id: idUsuario}, (err, user) => {
         if (err) res.status(400).send({
             msg: err
         })
-        //console.log(req.body.email + "    " + req.body.message  )
+        //console.log(req.body.email + "    " + req.body.message)
+        //console.log(user.tipoUsuario)
+
         if (user.tipoUsuario == 0) {
-            sendCustomEmail(req.body.email, req.body.message)
+            sendCustomEmail(user.email, req.body.message)
             return res.status(202).send({
                 msg: "mail ha sido enviado correctamente"
             })
