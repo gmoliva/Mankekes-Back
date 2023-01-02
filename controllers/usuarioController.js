@@ -99,7 +99,9 @@ const getCurrentAdmin = (req, res) => {
 
 const getAllConserjes = (req, res) => {
     
-	Usuario.find({tipoUsuario: 1},{estadoUsuario:0}, (err, usuarios) => {
+	Usuario.find({tipoUsuario: 1})
+		.where("estadoUsuario").equals("0")
+		.exec((err, usuarios) => {
 		if (err) {
 			res.status(400).send({ message: "Error al listar" })
 		}
