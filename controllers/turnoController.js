@@ -202,6 +202,32 @@ const validateWeek = async (req, res) => {
 
 }
 
+const getTurnoCurrentDate = async (req, res) => {
+	
+	let currentDate = new Date()
+
+	Turno.find()
+	.populate('idUsuario')
+	.exec((err, result) => {
+		if(err) return console.log(err)
+		
+		let users = []
+
+		result.forEach(turno => {
+			if(Date.parse(turno.fecha.getUTCDate()) === Date.parse(currentDate.getUTCDate()))
+			users.push({nombre: turno.idUsuario.nombre, tipo: turno.tipo})			
+		});
+
+		if(users[0]?.tipo === 1){
+			let temp = users[0]
+			users[0] = users.pop()
+			users.push(temp)
+		}
+
+		return res.status(200).send(users)
+
+	})
+}
 
 
 module.exports = {
@@ -211,5 +237,6 @@ module.exports = {
 	getTurnoFrom,
 	updateTurno,
 	deleteTurno,
-	setEntradaSalida
+	setEntradaSalida,
+	getTurnoCurrentDate
 }

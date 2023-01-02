@@ -12,4 +12,6 @@ api.put('/:id',turnoController.updateTurno);
 //api.put('/turnoIO/:idTurno', mailerController.setEntradaSalida);
 api.get('/getFromUser/:id', turnoController.getTurnoFrom);
 
+api.get('/getConserjes/currentDate/', turnoController.getTurnoCurrentDate);
+
 module.exports = api;
