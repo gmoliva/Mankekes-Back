@@ -29,6 +29,8 @@ const getNovedades = (req, res) => {
 const getheNovedades = (req, res) => {
 	let id = req.params.idUsuario;
 	Novedad.find()
+	.populate('idUsuario')
+	.populate('idTurno')
 	.where('idUsuario').ne([])
 	.where('idUsuario').equals(id)
 	.exec(
