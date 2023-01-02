@@ -211,18 +211,21 @@ const getTurnoCurrentDate = async (req, res) => {
 	.exec((err, result) => {
 		if(err) return console.log(err)
 		
-		let users = []
+		let users = {
+			dia:"",
+			noche: ""
+		}
 
 		result.forEach(turno => {
 			if(Date.parse(turno.fecha.getUTCDate()) === Date.parse(currentDate.getUTCDate()))
-			users.push({nombre: turno.idUsuario.nombre, tipo: turno.tipo})			
-		});
+			{
+				if(turno.tipo == 0)
+				users.dia = turno.idUsuario.nombre
 
-		if(users[0]?.tipo === 1){
-			let temp = users[0]
-			users[0] = users.pop()
-			users.push(temp)
-		}
+				if(turno.tipo == 1)
+				users.noche = turno.idUsuario.nombre
+			}
+		});
 
 		return res.status(200).send(users)
 
