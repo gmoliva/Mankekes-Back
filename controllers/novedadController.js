@@ -18,11 +18,27 @@ const createNovedad = (req, res) => {
 }
 
 const getNovedades = (req, res) => {
-	Novedad.find()
+	Novedad.findById()
 		.populate('idTurno')
 		.exec((err, novedades) => {
 		if (err) return res.status(400).send({ message: err })
 		res.send(novedades)
+	})
+}
+
+const getheNovedades = (req, res) => {
+	let id = req.params.idUsuario;
+	Novedad.find()
+	.where('idUsuario').ne([])
+	.where('idUsuario').equals(id)
+	.exec(
+	(err, result) => {
+		if (err) {
+			res.status(400).send({
+				message: err
+			})
+		}
+		res.status(200).send(result);
 	})
 }
 
@@ -112,6 +128,7 @@ const getNovedadesFrom = (req, res) => {
 module.exports = {
 	createNovedad,
 	getNovedades,
+	getheNovedades,
 	getNovedad,
 	updateNovedad,
 	deleteNovedad,
