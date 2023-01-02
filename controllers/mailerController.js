@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async (request, email) => {
-    console.log(process.env.URI)
+
     if (request.body.entrada) {
         title = "Notificacion de entrada"
         content = "Conserje ha entrado."
@@ -25,11 +25,11 @@ const sendEmail = async (request, email) => {
         title = "Notificacion de salida"
         content = "Conserje se ha retirado."
     } else
-    if (request.body.asunto) {
+    if (request.body.asunto && request.body.descripcion) {
         title = "Nueva novedad: " + request.body.asunto
         content = "" + request.body.descripcion
     } else
-    if (request.body.justificacion) {
+    if (request.body.asunto && request.body.justificacion) {
         title = "Conserje no puede asistir a su turno"
         content = request.body.justificacion
     } else return console.log("no se ha encontrado ningun parametro por el que enviar correo")
@@ -90,13 +90,15 @@ const sendShiftEmail = (req) => {
 const sendNotification = (req, res) => {
     let idUsuario = req.params.idUsuario
 
-    Usuario.findOne({rut: idUsuario}, (err, user) => {
+    Usuario.findOne({_id: idUsuario}, (err, user) => {
         if (err) res.status(400).send({
             msg: err
         })
-        //console.log(req.body.email + "    " + req.body.message  )
+        //console.log(req.body.email + "    " + req.body.message)
+        //console.log(user.tipoUsuario)
+
         if (user.tipoUsuario == 0) {
-            sendCustomEmail(req.body.email, req.body.message)
+            sendCustomEmail(user.email, req.body.message)
             return res.status(202).send({
                 msg: "mail ha sido enviado correctamente"
             })
